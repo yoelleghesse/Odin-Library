@@ -1,0 +1,14 @@
+.book-card {
+    border: 1px solid #1b1a1a;
+    padding: 12px;
+    margin: 12px;
+    border-radius: 8px;
+    width: 250px;
+    background: #7dcde6;
+}
+
+.book-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
