@@ -7,8 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="library-container"></div>
+    <h1>Book Library</h1>
 
+    <form id="book-form">
+        <input type="text" id="title" placeholder="Book Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="number" id="pages" placeholder="Pages" required>
+        <label>
+            <input type="checkbox" id="read-status"> Read
+        </label>
+        <button id="submit-button" type="submit">Add Book</button>
+    </form>
+
+    <div id="library-container" class="library-table"></div>
     <script src="script.js"></script>
 </body>
 </html>

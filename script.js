@@ -13,29 +13,45 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-function createBookCard(book) {
-    const card = document.createElement("div");
-    card.classList.add("book-card");
+function deleteBook(id) {
+    const index = myLibrary.findIndex(book => book.id === id);
+    if (index !== -1) {
+        myLibrary.splice(index, 1);
+    }
+}
 
-    const title = document.createElement("h2");
-    title.classList.add("book-title");
+function createTableRow(book) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    const title = document.createElement("div");
     title.textContent = book.title;
+    row.appendChild(title);
 
-    const author = document.createElement("p");
-    author.textContent = 'Author: ' + book.author;
+    const author = document.createElement("div");
+    author.textContent = book.author;
+    row.appendChild(author);
 
-    const pages = document.createElement("p");
-    pages.textContent = 'Pages: ' + book.pages;
+    const pages = document.createElement("div");
+    pages.textContent = book.pages;
+    row.appendChild(pages);
 
-    const read = document.createElement("p");
-    read.textContent = 'Read: ' + (book.read ? 'Yes' : 'No');
+    const read = document.createElement("div");
+    read.textContent = book.read ? "Read" : "Not Read";
+    row.appendChild(read)
 
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(pages);
-    card.appendChild(read);
+    const actions = document.createElement("div");
+    const btn = document.createElement("button");
+    btn.textContent = "Delete";
+    btn.classList.add("delete-btn");
+    btn.addEventListener("click", () => {
+        deleteBook(book.id);
+        displayLibrary();
+    });
+    actions.appendChild(btn);
+    row.appendChild(actions);
 
-    return card;
+    return row;
 }
 
 
@@ -43,11 +59,33 @@ function displayLibrary() {
     const libraryContainer = document.getElementById("library-container");
     libraryContainer.innerHTML = '';
 
+    const header = ["Title", "Author", "Pages", "Read", "Actions"];
+
+    header.forEach(text => {
+        const div = document.createElement("div");
+        div.textContent = text;
+        div.classList.add("header");
+        libraryContainer.appendChild(div);
+    })
+
     myLibrary.forEach(book => {
-        const bookCard = createBookCard(book);
-        libraryContainer.appendChild(bookCard);
+        const row = createTableRow(book);
+        libraryContainer.appendChild(row);
     })
 }
+
+document.getElementById("book-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read-status").checked;
+
+    addBookToLibrary(new Book(title, author, pages, read));
+    displayLibrary();
+    this.reset();
+})
 
 addBookToLibrary(new Book("Dune", "Frank Herbert", 450, true));
 addBookToLibrary(new Book("1984", "George Orwell", 328, false));

@@ -12,3 +12,46 @@
     font-weight: bold;
     margin-bottom: 8px;
 }
+
+.library-table {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.row {
+    display: contents;
+}
+
+.library-table div {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.header {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.delete-btn {
+    background: crimson;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background: darkred;
+}
+
+#submit-button {
+    background: rgb(21, 85, 204);
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
